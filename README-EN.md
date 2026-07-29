@@ -25,7 +25,7 @@ cp -r opencode.json AGENTS.md .rules/ .opencode/ .markdownlint.json ../my-new-pr
 ### 🥈 Optional (Better DX)
 
 ```bash
-cp -r .scratch/ docs/ memory/ CONTEXT.md .github/ ../my-new-project/
+cp -r .scratch/ docs/ memory/ CONTEXT.md ../my-new-project/
 ```
 
 | File | Purpose |
@@ -34,12 +34,12 @@ cp -r .scratch/ docs/ memory/ CONTEXT.md .github/ ../my-new-project/
 | `docs/agents/` | Issue tracking conventions, triage label mapping |
 | `memory/` | Cross-session state templates (replace with real project content after copying) |
 | `CONTEXT.md` | Domain glossary (fill in your project's terms after copying) |
-| `.github/workflows/ci.yml` | CI configuration (adjust for your project language) |
 
 ### 🚫 Don't Copy
 
 - `README.md` / `README-EN.md` — your new project should have its own README
-- `.gitignore` — reference only; generate one for your project's language stack
+- `.github/workflows/ci.yml` — the AI will auto-generate this when uploading
+- `.gitignore` — the AI will auto-generate this when uploading
 
 ### ✅ Post-Copy Steps
 

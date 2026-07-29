@@ -25,7 +25,7 @@ cp -r opencode.json AGENTS.md .rules/ .opencode/ .markdownlint.json ../my-new-pr
 ### 🥈 可选复制（开发体验提升）
 
 ```bash
-cp -r .scratch/ docs/ memory/ CONTEXT.md .github/ ../my-new-project/
+cp -r .scratch/ docs/ memory/ CONTEXT.md ../my-new-project/
 ```
 
 | 文件 | 作用 |
@@ -34,12 +34,12 @@ cp -r .scratch/ docs/ memory/ CONTEXT.md .github/ ../my-new-project/
 | `docs/agents/` | Issue 跟踪约定、Triage 标签映射 |
 | `memory/` | 跨 Session 状态模板（复制后替换为项目真实内容） |
 | `CONTEXT.md` | 领域术语表（复制后填写项目术语） |
-| `.github/workflows/ci.yml` | CI 配置（按项目语言调整） |
 
 ### 🚫 不需要复制
 
 - `README.md` / `README-EN.md` — 新项目应有自己的 README
-- `.gitignore` — 参考用，新项目按语言生成更适合
+- `.github/workflows/ci.yml` — AI 上传时会自动辅助生成
+- `.gitignore` — AI 上传时会自动辅助生成
 
 ### ✅ 复制后操作
 
