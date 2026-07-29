@@ -1,6 +1,60 @@
 # OpenCode Harness Package
 
-这是一个 OpenCode 项目，集成了多种 AI 辅助开发工具和规范，旨在提高代码质量和开发效率。该体系可直接复制到新项目中使用。
+这是一个 OpenCode 项目，集成了多种 AI 辅助开发工具和规范，旨在提高代码质量和开发效率。
+
+---
+
+## 📦 复制到新项目
+
+将本 harness 复制到新项目（如 `../my-new-project`），按优先级选取文件：
+
+### 🥇 必须复制（核心质量保障体系）
+
+```bash
+cp -r opencode.json AGENTS.md .rules/ .opencode/ .markdownlint.json ../my-new-project/
+```
+
+| 文件 | 作用 |
+|------|------|
+| `opencode.json` | OpenCode 项目配置，加载 rules/ 和 plugins/ |
+| `AGENTS.md` | Agent 提示词，告诉 AI 如何理解项目 |
+| `.rules/` | 安全红线、Ponytail 哲学、错误分类、术语表、工作流、L2 领域规则 |
+| `.opencode/` | 3 个 TypeScript 插件（PreToolUse 安全拦截 + PostToolUse 审计 + TodoEnforcer）+ 构建配置 |
+| `.markdownlint.json` | Markdown 格式检查 |
+
+### 🥈 可选复制（开发体验提升）
+
+```bash
+cp -r .scratch/ docs/ memory/ CONTEXT.md .github/ ../my-new-project/
+```
+
+| 文件 | 作用 |
+|------|------|
+| `.scratch/` | 本地 Issue Tracker，Markdown 管理需求/任务 |
+| `docs/agents/` | Issue 跟踪约定、Triage 标签映射 |
+| `memory/` | 跨 Session 状态模板（复制后替换为项目真实内容） |
+| `CONTEXT.md` | 领域术语表（复制后填写项目术语） |
+| `.github/workflows/ci.yml` | CI 配置（按项目语言调整） |
+
+### 🚫 不需要复制
+
+- `README.md` / `README-EN.md` — 新项目应有自己的 README
+- `.gitignore` — 参考用，新项目按语言生成更适合
+
+### ✅ 复制后操作
+
+```bash
+# 1. 安装插件依赖并编译
+cd ../my-new-project/.opencode && npm install && npx tsc
+
+# 2. 替换 memory/ 模板为项目真实内容
+#    memory/progress.md → 记录实际进度
+#    memory/decisions.md → 记录实际决策
+
+# 3. 修改 AGENTS.md 开头描述为新项目说明
+```
+
+---
 
 ## 项目概述
 

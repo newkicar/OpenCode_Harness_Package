@@ -1,6 +1,60 @@
 # OpenCode Harness Package
 
-This is an OpenCode project that integrates various AI-assisted development tools and standards to improve code quality and development efficiency. This harness system can be directly copied to new projects.
+This is an OpenCode project that integrates various AI-assisted development tools and standards to improve code quality and development efficiency.
+
+---
+
+## 📦 Copying to a New Project
+
+Copy this harness into a new project (e.g. `../my-new-project`), selecting files by priority:
+
+### 🥇 Required (Core Quality Assurance)
+
+```bash
+cp -r opencode.json AGENTS.md .rules/ .opencode/ .markdownlint.json ../my-new-project/
+```
+
+| File | Purpose |
+|------|---------|
+| `opencode.json` | OpenCode project config, loads `.rules/` and `.opencode/plugins/` |
+| `AGENTS.md` | Agent prompt that tells the AI how to understand the project |
+| `.rules/` | Security redlines, Ponytail philosophy, error classification, glossary, workflows, L2 domain rules |
+| `.opencode/` | 3 TypeScript plugins (PreToolUse security intercept + PostToolUse audit + TodoEnforcer) + build config |
+| `.markdownlint.json` | Markdown linting configuration |
+
+### 🥈 Optional (Better DX)
+
+```bash
+cp -r .scratch/ docs/ memory/ CONTEXT.md .github/ ../my-new-project/
+```
+
+| File | Purpose |
+|------|---------|
+| `.scratch/` | Local issue tracker — manage tasks/requirements in Markdown |
+| `docs/agents/` | Issue tracking conventions, triage label mapping |
+| `memory/` | Cross-session state templates (replace with real project content after copying) |
+| `CONTEXT.md` | Domain glossary (fill in your project's terms after copying) |
+| `.github/workflows/ci.yml` | CI configuration (adjust for your project language) |
+
+### 🚫 Don't Copy
+
+- `README.md` / `README-EN.md` — your new project should have its own README
+- `.gitignore` — reference only; generate one for your project's language stack
+
+### ✅ Post-Copy Steps
+
+```bash
+# 1. Install plugin dependencies and compile
+cd ../my-new-project/.opencode && npm install && npx tsc
+
+# 2. Replace memory/ templates with real project content
+#    memory/progress.md → track actual progress
+#    memory/decisions.md → record actual decisions
+
+# 3. Update AGENTS.md description for your new project
+```
+
+---
 
 ## Project Overview
 
