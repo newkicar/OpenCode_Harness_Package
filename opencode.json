@@ -1,0 +1,70 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  
+  "instructions": [
+    ".rules/00-core.md",
+    ".rules/01-ponytail.md",
+    ".rules/better-errors.md",
+    ".rules/workflows/*.md"
+  ],
+  
+  "plugin": [
+    ".opencode/plugins/pre-tool-use.ts",
+    ".opencode/plugins/post-tool-use.ts",
+    ".opencode/plugins/todo-enforcer.ts"
+],
+  
+  "agent": {
+    "build": {
+      "description": "标准开发代理，具有完整工具访问权限",
+      "mode": "primary",
+      "prompt": "{file:./AGENTS.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "skill": "allow"
+      }
+    },
+    "plan": {
+      "description": "规划代理，用于分析和规划，不修改代码",
+      "mode": "primary",
+      "temperature": 0.1,
+      "permission": {
+        "edit": "deny",
+        "bash": "ask",
+        "skill": "allow"
+      }
+    },
+    "code-reviewer": {
+      "description": "代码审查代理，专注于安全、性能和可维护性",
+      "mode": "subagent",
+      "temperature": 0.1,
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "skill": "allow"
+      }
+    },
+    "security-auditor": {
+      "description": "安全审计代理，识别潜在安全问题",
+      "mode": "subagent",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask",
+        "skill": "allow"
+      }
+    }
+  },
+  
+  "permission": {
+    "edit": "ask",
+    "bash": "ask",
+    "skill": "allow"
+  },
+  
+  "compaction": {
+    "auto": true,
+    "prune": false,
+    "reserved": 10000
+  }
+}

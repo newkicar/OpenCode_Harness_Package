@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        working-directory: .opencode
+        run: npm install --no-package-lock
+      
+      - name: TypeScript type check
+        working-directory: .opencode
+        run: npx tsc --noEmit
+      
+      - name: Validate JSON files
+        run: |
+          echo "Validating opencode.json..."
+          node -e "JSON.parse(require('fs').readFileSync('opencode.json', 'utf8'))"
+          echo "✅ opencode.json is valid"
+          
+          echo "Validating .opencode/package.json..."
+          node -e "JSON.parse(require('fs').readFileSync('.opencode/package.json', 'utf8'))"
+          echo "✅ .opencode/package.json is valid"
+      
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli
+      
+      - name: Lint Markdown files
+        run: |
+          echo "Checking Markdown files..."
+          markdownlint '**/*.md' --ignore node_modules
+          echo "✅ Markdown files are valid"
+
+  test-plugins:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        working-directory: .opencode
+        run: npm install --no-package-lock
+      
+      - name: Build plugins
+        working-directory: .opencode
+        run: npx tsc
+      
+      - name: Run plugin tests
+        working-directory: .opencode
+        run: npm test
